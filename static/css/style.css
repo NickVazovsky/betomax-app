@@ -1,0 +1,502 @@
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+@media (min-width: 768px)
+{
+  .text_slide
+  {
+    margin-top: 7%;
+  }
+}
+.form-update input[type=text], input[type=email] {
+    height: 44px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    /* border-radius: 2px; */
+    padding: 0 8px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    text-align: center;
+    font-size: 16pt;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.loginmodal-container {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: roboto;
+}
+
+.loginmodal-container h1 {
+  text-align: center;
+  font-size: 1.8em;
+  font-family: roboto;
+}
+
+.loginmodal-container input[type=submit] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.loginmodal-container input[type=text],input[type=number], input[type=password] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.loginmodal {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.loginmodal-submit {
+  /* border: 1px solid #3079ed; */
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #4d90fe;
+  padding: 17px 0px;
+  font-family: roboto;
+  font-size: 14px;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+
+.loginmodal-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #357ae8;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
+.loginmodal-container a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+} 
+
+.login-help{
+  font-size: 12px;
+}
+/*@media (min-width: 768px)
+{
+  .navbar-nav > li > a 
+{
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+    line-height: 20px;
+    color:#000;
+}
+.navbar-nav > li > a:hover 
+{
+  border-bottom:2.5px solid #000;
+}
+}
+body{
+	padding-top: 68px;
+}
+.shadows{
+	transition: opacity ease 0.01s;
+    background: #fff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.136);
+}*/
+/*.nav-padding{
+	padding-top: 0.7%;
+	padding-bottom: 0.7%;
+}*/
+/*.navbar{
+    margin-bottom: 0px !important;
+}*/
+body
+{
+  color:#000;
+}
+.glyphicon{
+  color: black;
+}
+.transparate_button{
+  background-color: #f6734b;
+  color: #FFFF;
+  font-size:12pt ;
+  border: 1px solid #f6734b;
+  padding: 1.5% 7% 1.5% 7%;
+
+}
+.input_qty
+{
+  font-size: 18px;
+    line-height: 20px;
+    font-weight: 700;
+    padding: 7px 10px;
+    border: none;
+    outline: none;
+    background: #eee;
+    color: #494949;
+}
+/* Style of standard button*/
+/*.transparate_button{
+    border: 2px solid #f6734b;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 1.5% 7% 1.5% 7%;
+    width: 80%;
+    max-width: 200px;
+    background: #f6734b;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+
+}*/
+.transparate_button a{
+    color:#FFFF;
+    text-decoration: none;
+}
+.transporate_button a:hover{
+    color:#FFFF;
+}
+.image-catalog{
+    width: 100%;
+}
+.button_catalog{
+     border: 2px solid #f6734b;
+    box-sizing: border-box;
+    padding: 1.5% 7% 1.5% 7%;
+    background: #f6734b;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+}
+.paddings{
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+.go_to_catalog
+{
+    margin: 0 auto;
+    padding: 0.5% 10% 0.5% 10%;
+    /* width: 80%; */
+    /* max-width: 200px; */
+    background: #f6734b;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.7s ease-out;
+}
+.bg-color
+{
+    background-color: #060605;
+    opacity: 0.8;
+    padding-bottom: 20px;
+}
+.bg-color p{
+    color:#FFFF;
+}
+.image-preimushestvo{
+    width: 32%;
+    margin-left: 34%;
+}
+.order_information
+{
+    padding-top: 23px;
+    line-height: 1.4em;
+}
+.go_to_order{
+    margin: 0 auto;
+    padding: 1.5% 6% 1.5% 6%;
+    /* width: 80%; */
+    /* max-width: 200px; */
+    background: #f6734b;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.7s ease-out;
+}
+.bg_sales{
+    background-color: #060605;
+    opacity: 0.8;
+}
+.download_prais_button{
+    border: 2px solid #FFF;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 1.5% 7% 1.5% 7%;
+    /* width: 80%; */
+    /* max-width: 200px; */
+    background: #fff;
+    background: rgba(255, 255, 255, 0);
+    /* border-radius: 8px; */
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+}
+.make_a_request{
+   border: 2px solid #fc6230;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-left: auto;
+    padding: 1.5% 7% 1.5% 7%;
+    /* width: 80%; */
+    /* max-width: 200px; */
+    background: #f6734b;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.3s ease-out;
+    
+}
+.sale_information
+{
+    padding-top: 40px;
+    font-size: 20px;
+    color:#FFFF;
+}
+.many_product{
+    font-size: 23px;
+    
+}
+.buttons_many_prod{
+    padding-top: 80px;
+}
+.factory_tours{
+    width: 100%;
+    padding-top: 6%;
+}
+.bottoms
+{
+  padding-bottom: 0px!important;
+}
+.tours_info{
+    font-size: 20px;
+    padding-top: 15%;
+    margin-left: 12%;
+    margin-bottom: 10%;
+    line-height: 1.4em;
+}
+.bg_footer{
+    background-color: #060605;
+    opacity: 0.8;
+}
+.bg_footer h2
+{
+  color: #FFFF;
+}
+.bg_footer p{
+    color:#FFFF;
+}
+.line{
+    border: 1.5px solid #FFFF;
+}
+.shop p > a
+{
+  color:#FFF;
+  text-decoration: dashed;
+}
+
+.input_footer{
+    font-size: 100%;
+    color: #000;
+    width: 59%;
+    border-radius: 4px;
+    color: black;
+    margin-bottom: 4%;
+    padding: 1%;
+    margin-left: 20%;
+}
+.padding_end_footer{
+    padding-bottom: 15px;
+}
+.end_bg_footer{
+    background-color: #2d2b2b;
+}
+/*style for shops*/
+.categories
+{
+  border-bottom: 1px solid #f5f5f5;
+
+  overflow: hidden;
+}
+.categories > li
+{
+  border: 1px solid #f2f2f2;
+  border-bottom-color: rgb(242, 242, 242);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+/*  padding: 14px 47px 14px 19px;*/
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: #000;
+  border-bottom: none;
+
+}
+.zoom-products:hover
+{
+  -webkit-box-shadow: 0px 0px 15px 3px rgba(242,242,242,1);
+  -moz-box-shadow: 0px 0px 15px 3px rgba(242,242,242,1);
+  box-shadow: 0px 0px 15px 3px rgba(242,242,242,1);
+  transition: box-shadow 0.3s ease;
+}
+.categories > li > a
+{
+  padding:23px;
+  color:black;
+}
+/*end style for shops */
+@media(min-width: 728px){
+  .add_to_cart
+  {
+  height:42px;
+  }  
+}
+.comments
+{
+  height: 570px; /* задаем произвольную высоту и ширину блока */
+  width:100%;
+  background-color: black;
+  background-size: 100% 100%;
+  animation: animatedBackground 60s linear infinite;
+  -moz-animation: animatedBackground 60s linear infinite;
+  -webkit-animation: animatedBackground 60s linear infinite;
+  -o-animation: animatedBackground 60s linear infinite;
+
+}
+.latest_publication
+{
+  margin-top: 6%;
+    margin-bottom: 6%;
+}
+@keyframes animatedBackground {
+    from {
+        background-position: 0 100%, 0 
+    }
+    to {
+         background-position: -1000px 100%, 0 0;/* анимируем свойство background-position */
+    }
+}
+/* Mozilla Firefox 5.0+ */
+@-moz-keyframes animatedBackground {
+    from {
+        background-position: 0 100%, 0 
+    }
+    to {
+         background-position: -1000px 100%, 0 0;/* анимируем свойство background-position */
+    }
+}
+/* Safari 4.0+, Chrome 4.0+ */
+@-webkit-keyframes animatedBackground {
+   from {
+        background-position: 0 100%, 0 
+    }
+    to {
+         background-position: -1000px 100%, 0 0;/* анимируем свойство background-position */
+    }
+}
+/* Opera 12.0+ */
+@-o-keyframes animatedBackground {
+    from {
+        background-position: 0 100%, 0 
+    }
+    to {
+         background-position: -1000px 100%, 0 0;/* анимируем свойство background-position */
+    }
+}
+/* не нужно использовать префикс -ms, так как свойства keyframes и animation поддерживаются с версии IE10 без префикса */
+
+

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+       <main id="mt-main">
+				<!-- Mt Contact Banner of the Page -->
+				<section class="mt-contact-banner style4 wow fadeInUp" data-wow-delay="0.4s"
+                         style="background-image: url({% static 'img/products_bg.jpg' %});
+                                 background-size: 100% 100%; height:300px; padding: 117px 0 14px;">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 text-center">
+								<h1 style="color: #FFF;">Ж/б изделия</h1>
+								<!-- Breadcrumbs of the Page -->
+								<nav class="breadcrumbs">
+									<ul class="list-unstyled">
+
+									</ul>
+								</nav><!-- Breadcrumbs of the Page end -->
+							</div>
+						</div>
+					</div>
+				</section>
+    <div class="product-detail-tab wow fadeInUp" data-wow-delay="0.4s">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<ul class="mt-tabs text-center text-uppercase">
+									<li><a href="#tab1" class="active">Информация о пользователе</a></li>
+									<li><a href="#tab2">Изменить данные</a></li>
+									<li><a href="#tab3">Заказы</a></li>
+								</ul>
+								<div class="tab-content">
+									<div id="tab1">
+						                <div class="col-xs-3 col-xs-offset-3">
+                                            {% for ava in avatar %}
+                                            <img style="width: 200px; border-radius: 195px; border: 2px solid;
+                                             height: 200px;" src="{% if ava.avatar %}{{ ava.avatar.url }}
+                                                            {% else %}
+                                                            {% static "img/no-avatar.jpg"%}{% endif %}" alt="user_photo">
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-xs-3 col-xs-offset-1">
+                                            {% for users in context %}
+                                            <p>Логин:{{ users.username }}</p>
+                                            <p>Имя:{{ users.first_name }}</p>
+                                            <p>Фамилия:{{ users.last_name }}</p>
+                                            <p>Email:{{ users.email }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+									<div id="tab2">
+                                        <div class="col-xs-4 col-xs-offset-4">
+
+                                        <form method="POST" class="form-update">
+                                            {% csrf_token %}
+                                            <fieldset><h3 class="text-center">Изменить данные:</h3></fieldset>
+                                            {{ update_user_form }}
+                                            <br/>
+                                            <p class="text-center"><input type="submit" class="btn btn-success" value="Изменить"></p>
+                                        </form>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <hr/>
+                                        </div>
+                                        <div class="col-xs-4 col-xs-offset-4">
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                {{ change_password }}
+                                            <br/>
+                                            <p class="text-center"><input type="submit" class="btn btn-success" value="Изменить пароль"></p>
+                                            </form>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <hr/>
+                                        </div>
+                                        <div class="col-xs-4 col-xs-offset-4">
+
+                                        <form method="POST" class="form-update" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <fieldset><h3 class="text-center">Изменить фото профиля и номер телефона:</h3></fieldset>
+                                            {{ update_avatar }}<br/>
+                                            <p class="text-center"><input type="submit" class="btn btn-success" value="Изменить"></p>
+                                        </form>
+                                        </div>
+									</div>
+									<div id="tab3">
+                                        
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+       </main>
+{% endblock content %}

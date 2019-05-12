@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+    .bill-detail > form > input{
+    display: block;
+    width: 97%;
+    height: 33px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.4285;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+    </style>
+            <section class="mt-contact-banner mt-banner-22 wow fadeInUp" data-wow-delay="0.4s"
+                 style="background-image: url({% static 'img/shoping_cart_bg.jpg'%});">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <h1 class="text-center">Ваша корзина</h1>
+                <!-- Breadcrumbs of the Page -->
+                <!-- Breadcrumbs of the Page end -->
+              </div>
+            </div>
+          </div>
+        </section>
+    <div class="mt-process-sec wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <!-- Process List of the Page -->
+                <ul class="list-unstyled process-list">
+                  <li class="active">
+                    <span class="counter">01</span>
+                    <strong class="title">Корзина</strong>
+                  </li>
+                  <li class="active">
+                    <span class="counter">02</span>
+                    <strong class="title">Оформление заказа</strong>
+                  </li>
+                  <li>
+                    <span class="counter">03</span>
+                    <strong class="title">Оплата</strong>
+                  </li>
+                </ul>
+                <!-- Process List of the Page end -->
+              </div>
+            </div>
+          </div>
+        </div><!-- Mt Process Section of the Page end -->
+        <!-- Mt Detail Section of the Page -->
+        <section class="mt-detail-sec toppadding-zero wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 bill-detail">
+                <h2>Детали заказа</h2>
+                <!-- Bill Detail of the Page -->
+                  <form class="bill-detail" action="." method="post">
+                      {% csrf_token %}
+                      <label>Имя:</label>
+                      {{ form.first_name }}
+                      <label>Фамилия:</label>
+                      {{ form.last_name }}
+                      <label>Email:</label>
+                      {{ form.email }}
+                      <div>
+                          <input  style="" id="checks" type="radio" value="Самовывоз"><label for="checks">Самовывоз</label>
+                      </div>
+                      <div>
+                          <input style="" id="check" type="radio" value="Доставка"><label for="check">Доставка</label>
+
+                      </div>
+
+                      <label style="display:none;" id="label_address">Адрес:</label>
+                      {{ form.address }}
+                      <label>Город:</label>
+                      {{ form.city }}
+                      <label>Почтовый индекс</label>
+                      {{ form.postal_code }}
+                  <fieldset>
+{#                    <div class="form-group">#}
+{#                      <div class="col">#}
+{#                        {{ form.first_name }}#}
+{#                      </div>#}
+{#                      <div class="col">#}
+{#                        {{ form.last_name }}#}
+{#                      </div>#}
+{#                    </div>#}
+{#                    <div class="form-group">#}
+{#                      {{ form.email }}#}
+{#                    </div>#}
+{#                    <div class="form-group">#}
+{#                      {{ form.address }}#}
+{#                    </div>#}
+{#                    <div class="form-group">#}
+{#                        {{ form.postal_code }}#}
+{#                    </div>#}
+                      <br/>
+                      <input style="float: none!important; margin:0% auto;" class="process-btn" type="submit" value="Оформить заказ">
+                  </fieldset>
+                </form>
+                <!-- Bill Detail of the Page end -->
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <div class="holder">
+                  <h2>Ваш заказ</h2>
+                  <ul class="list-unstyled block">
+                    <li>
+                      <div class="txt-holder">
+                        <strong class="title sub-title pull-left">Итого без доставки:</strong>
+                        <div class="txt pull-right">
+                          <span><i class="fa fa-usd"></i> {{ cart.get_total_price }}</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="txt-holder">
+                        <strong class="title sub-title pull-left">Доставка</strong>
+                        <div class="txt pull-right">
+                          <span>Free Shipping</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li style="border-bottom: none;">
+                      <div class="txt-holder">
+                        <strong class="title sub-title pull-left">Итого к оплате:</strong>
+                        <div class="txt pull-right">
+                          <span><i class="fa fa-usd"></i> {{ cart.get_total_price }}</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+{#                  <h2>PAYMENT METHODS</h2>#}
+{#                  <!-- Panel Group of the Page -->#}
+{#                  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">#}
+{#                    <!-- Panel Panel Default of the Page -->#}
+{#                    <div class="panel panel-default">#}
+{#                      <div class="panel-heading" role="tab" id="headingOne">#}
+{#                        <h4 class="panel-title">#}
+{#                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">#}
+{#                           Перевод на банковский счет#}
+{#                            <span class="check"><i class="fa fa-check"></i></span>#}
+{#                          </a>#}
+{#                        </h4>#}
+{#                      </div>#}
+{#                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">#}
+{#                        <div class="panel-body">#}
+{#                          <p>Make your payment directly into our bank account. Please use your order id as the payment reference. Your order wont be shippided until the funds have cleared in our account</p>#}
+{#                        </div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                    <!-- Panel Panel Default of the Page end -->#}
+{#                    <!-- Panel Panel Default of the Page -->#}
+{#                    <div class="panel panel-default">#}
+{#                      <div class="panel-heading" role="tab" id="headingTwo">#}
+{#                        <h4 class="panel-title">#}
+{#                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">#}
+{#                            Оплата наличными#}
+{#                            <span class="check"><i class="fa fa-check"></i></span>#}
+{#                          </a>#}
+{#                        </h4>#}
+{#                      </div>#}
+{#                      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">#}
+{#                        <div class="panel-body">#}
+{#                          <p>Make your payment directly into our bank account. Please use your order id as the payment reference. Your order wont be shippided until the funds have cleared in our account</p>#}
+{#                        </div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                    <!-- Panel Panel Default of the Page end -->#}
+{#                    <!-- Panel Panel Default of the Page -->#}
+{#                    <div class="panel panel-default">#}
+{#                      <div class="panel-heading" role="tab" id="headingThree">#}
+{#                        <h4 class="panel-title">#}
+{#                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">#}
+{#                            PAYPAL#}
+{#                            <span class="check"><i class="fa fa-check"></i></span>#}
+{#                          </a>#}
+{#                        </h4>#}
+{#                      </div>#}
+{#                      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">#}
+{#                        <div class="panel-body">#}
+{#                          <p>Make your payment directly into our bank account. Please use your order id as the payment reference. Your order wont be shippided until the funds have cleared in our account</p>#}
+{#                        </div>#}
+{#                      </div>#}
+{#                    </div>#}
+{#                    <!-- Panel Panel Default of the Page end -->#}
+{#                  </div>#}
+{#                  <!-- Panel Group of the Page end -->#}
+{#                </div>#}
+{#                <div class="block-holder">#}
+{#                  <input type="checkbox" checked> I’ve read &amp; accept the <a href="#">terms &amp; conditions</a>#}
+{#                </div>#}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Mt Detail Section of the Page end -->
+      </main><!-- Main of the Page end here -->
+      <!-- footer of the Page -->
+    <script>
+    $( "#checks" ).on("change", function() {
+        $('#check').attr('checked', false);
+        $('#label_address').css('display','none');
+        $('#id_address').attr("type", 'hidden');
+        $('#id_address').attr("value", "Самовывоз");
+
+    });
+    </script>
+    <script>
+    $( "#check" ).on("change", function() {
+        $('#checks').attr('checked',false);
+        $('#label_address').css('display', 'block');
+        $('#id_address').attr("type", 'text');
+        $('#id_address').attr("value", "");
+
+    });
+</script>
+
+{% endblock content %}

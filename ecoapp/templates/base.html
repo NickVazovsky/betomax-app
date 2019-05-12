@@ -1,0 +1,635 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+    <!-- Bootstrap core CSS -->
+    <title>Betomax-beton завод ЖБИ</title>
+	<!-- include the site stylesheet -->
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic%7cMontserrat:400,700%7cOxygen:400,300,700' rel='stylesheet' type='text/css'>
+	<!-- include the site stylesheet -->
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+
+  	<!-- include the site stylesheet -->
+  	<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+	<!-- include the site stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/icon-fonts.css' %}">
+	<!-- include the site stylesheet -->
+    	<link rel="stylesheet" href="{% static 'css/main.css' %}?{% now "U" %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}?{% now "U" %}">
+
+
+
+
+	<!-- include the site stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+        <script src="http://pure.github.io/pure/libs/pure.js"></script>
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+    <!---slider -->
+
+    <!--- end slider -->
+</head>
+
+<body>
+    <div id="myModal" class="modal">
+	<div class="modal-content">
+    <div class="modal-dialog">
+				<div class="loginmodal-container">
+					   <span class="close">&times;</span>
+					<h1>Оформить заявку на покупку товарного бетона</h1><br>
+				  <form method="POST"  id="beton">
+                      {% csrf_token %}
+				        {{ beton_form }}
+                      <input type="hidden" name="form-type" value="beton">
+					<input type="submit" name="login" class="login loginmodal-submit btn btn-success" value="Отправить">
+				  </form>
+				</div>
+			</div>
+  </div>
+  </div>
+  <div id="arend" class="modal">
+	<div class="modal-content">
+    <div class="modal-dialog">
+				<div class="loginmodal-container">
+					   <span class="close">&times;</span>
+					<h1>Оформить заявку на аренду автотранспорта</h1><br>
+				  <form method="POST" id="renta">
+                      {% csrf_token %}
+					{{ renta_form }}
+                      <input type="hidden" name="form_type" value="renta">
+					<input type="submit" name="login" class="login loginmodal-submit btn btn-success" value="Отправить">
+				  </form>
+				</div>
+			</div>
+  </div>
+  </div>
+
+  <div id="person" class="modal">
+	<div class="modal-content">
+    <div class="modal-dialog">
+				<div class="loginmodal-container">
+					   <span class="close">&times;</span>
+					<h1>Оформить персональный заказ</h1><br>
+				  <form method="POST" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      {{ personal_form }}
+                      <br/>
+                      <br/>
+					<input type="submit" name="login" class="login loginmodal-submit btn btn-success" value="Отправить">
+				  </form>
+				</div>
+			</div>
+  </div>
+  </div>
+    <div id="optom" class="modal">
+	<div class="modal-content">
+    <div class="modal-dialog">
+				<div class="loginmodal-container">
+					   <span class="close">&times;</span>
+					<h1>Оформить заявку на покупку оптом</h1><br>
+				  <form method="POST">
+                      {% csrf_token %}
+                      {{ wholesales_form }}
+                      <br/>
+					<input type="submit" name="login" class="login loginmodal-submit btn btn-success" value="Отправить">
+				  </form>
+				</div>
+			</div>
+  </div>
+  </div>
+    <div id="ekskursion" class="modal">
+	<div class="modal-content">
+    <div class="modal-dialog">
+				<div class="loginmodal-container">
+					   <span class="close">&times;</span>
+					<h1>Оформить заявку на экскурсию</h1><br>
+				  <form method="POST">
+					{% csrf_token %}
+                      {{ excursion_form }}
+                    <br/>
+					<input type="submit" name="login" class="login loginmodal-submit btn btn-success" value="Отправить">
+				  </form>
+				</div>
+			</div>
+  </div>
+  </div>
+
+	<!-- main container of all the page elements -->
+	<div id="wrapper">
+		<!-- Page Loader -->
+    <div id="pre-loader" class="loader-container">
+      <div class="loader">
+        <img src="{% static 'img/svg/rings.svg' %}" alt="loader">
+      </div>
+    </div>
+		<!-- W1 start here -->
+		<div class="w1">
+			<!-- mt header style4 start here -->
+			<header id="mt-header" class="style4">
+				<!-- mt bottom bar start here -->
+				<div class="mt-bottom-bar">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- mt logo start here -->
+								<div class="mt-logo"><a href="#"><img src="{% static 'img/logo.png'%}" alt="betomax"></a></div>
+								<!-- mt icon list start here -->
+								<ul class="mt-icon-list">
+									<li class="hidden-lg hidden-md">
+										<a href="#" class="bar-opener mobile-toggle">
+											<span class="bar"></span>
+											<span class="bar small"></span>
+											<span class="bar"></span>
+										</a>
+									</li>
+									<li><a href="#" class="icon-magnifier"></a></li>
+
+									<li>
+                                         {% with total_items=cart|length %}
+                                            {% if cart|length > 0 %}
+                                              <a href="{% url "cart:CartDetail" %}" class="cart-openers">
+                                                <span class="glyphicon glyphicon-shopping-cart"> </span>
+                                                <span class="num" id="cart_count">{{ total_items }}</span>
+                                              </a>
+                                            {% else %}
+                                                <a>
+                                                <span class="glyphicon glyphicon-shopping-cart"> </span>
+                                                <span class="num" id="cart_count">{{ total_items }}</span>
+                                                </a>
+                                            {% endif %}
+                                          {% endwith %}
+
+										<!-- mt drop start here -->
+									</li>
+									<li>
+										<a href="#" class="bar-opener side-opener">
+											<span class="bar"></span>
+											<span class="bar small"></span>
+											<span class="bar"></span>
+										</a>
+									</li>
+								</ul><!-- mt icon list end here -->
+								<!-- navigation start here -->
+								<nav id="nav">
+									<ul>
+										<li>
+											<a href="{% url 'shop:base' %}">Главная</a>
+										</li>
+										<li>
+											<a href="{% url 'shop:about_us' %}">О заводе</a>
+										</li>
+
+										<li>
+											<a href="{% url 'shop:shops' %}">Ж/б изделия </a>
+										</li>
+
+										<li>
+											<a href="{% url 'shop:transport' %}">Транспортные услуги</a>
+										</li>
+										<li>
+											<a href="{% url 'shop:contact_us' %}">Контакты</a>
+										</li>
+									</ul>
+								</nav>
+								<!-- mt icon list end here -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- mt bottom bar end here -->
+				<span class="mt-side-over"></span>
+			</header><!-- mt header style4 end here -->
+			<!-- mt side menu start here -->
+			<div class="mt-side-menu">
+				<!-- mt holder start here -->
+				<div class="mt-holder">
+					<a href="#" class="side-close"><span></span><span></span></a>
+					<strong class="mt-side-title">Мой профиль</strong>
+					<!-- mt side widget start here -->
+					<div class="mt-side-widget">
+                         {% if user.is_authenticated %}
+                             <header>
+							<span class="mt-side-subtitle">Добро пожаловать {{ user.username }} !</span>
+							<p></p>
+						</header>
+                            <form method="post" action="{% url 'shop:logout' %}?next={{ request.path|urlencode }}">
+                                {% csrf_token %}
+                                <input class="btn-type1" type="submit" name="logout" value="{% trans "Выйти" %}"/>
+                                 <input class="btn-type1" type="submit" name="profile" value="{% trans "Войти в свой профиль" %}"
+                                 onclick="document.location='{% url 'shop:personal' %}'; return false;"/>
+                            </form>
+                            {% else %}
+                             <header>
+							<span class="mt-side-subtitle">Войти</span>
+							<p>Добро пожаловать! Введите логи и пароль чтобы зайти в свой аккаунт</p>
+						    </header>
+                            <form method="post" action="{% url 'shop:auth:login' %}?next={{ request.path|urlencode }}">
+                                {% csrf_token %}
+                                <fieldset>
+                                <input type="text" placeholder="Логин" name="username" class="input" maxlength="30"  id="id_username"/>
+                                <input type="password" placeholder="Пароль" name="password"  class="input" id="id_password"/>
+                                <input type="submit" name="login" class="btn-type2" value="{% trans "Войти" %}"/>
+                                </fieldset>
+                            </form>
+                             <div class="or-divider"><span class="txt">Или</span></div>
+					<!-- mt side widget start here -->
+
+					<div class="mt-side-widget">
+						<header>
+							<span class="mt-side-subtitle">Зарегистрироваться</span>
+                            <p class="text-center"><a class=" btn btn-type2" href="{% url 'shop:register' %}">Регистрация</a><</p>
+						</header> -->
+					</div>
+
+                            {% endif %}
+					</div>
+					<!-- mt side widget end here -->
+
+					<!-- mt side widget end here -->
+				</div>
+				<!-- mt holder end here -->
+			</div><!-- mt side menu end here -->
+			<!-- mt search popup start here -->
+			<div class="mt-search-popup">
+				<div class="mt-holder">
+					<a href="#" class="search-close"><span></span><span></span></a>
+					<div class="mt-frame">
+						<form action="#">
+							<fieldset>
+								<input type="text" placeholder="Search...">
+								<span class="icon-microphone"></span>
+								<button class="icon-magnifier" type="submit"></button>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div><!-- mt search popup end here -->
+         {% block content %}
+            <div class="mt-main-slider">
+				<!-- slider banner-slider start here -->
+				<div class="slider banner-slider">
+					<!-- holder start here -->
+					<div class="holder text-center" style="background-image: url({% static 'img/sliders_one.png' %});">
+						<div class="container">
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="text centerize">
+										<strong class="title"></strong>
+										<h2>ООО "BETOMAX-BETON" </h2>
+										<h3 style="color:#FFF;">Завод железобетонных изделий</h3>
+										<div class="txt">
+											<p>Мы строим качественное будущее</p>
+										</div>
+										<a class="transparate_button btn btn-success " href="#">Скачать прайс-лист</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- holder end here -->
+
+					<!-- holder start here -->
+					<div class="holder text-center" style="background-image: url({% static 'img/slider_seconds.png' %});">
+						<div class="container">
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="text centerize">
+										<strong class="title"></strong>
+										<h2>Аренда автотраспорта </h2>
+										<h3 style="color:#FFF;">по г. Ташкенту</h3>
+										<div class="txt">
+											<p>Наши водители с радостью доставят ваш груз до пункта назначения</p>
+										</div>
+										<a  id="myArend" class="btn btn-success transparate_button" href="#">Оформить аренду</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- holder end here -->
+
+					<!-- holder start here -->
+					<div class="holder text-center" style="background-image: url({% static 'img/sliders_beton.png' %});">
+						<div class="container">
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="text centerize">
+										<strong class="title"></strong>
+										<h2>Товарный бетон</h2>
+										<h3 style="color:#FFF;">Бесплатная доставка по Ташкенту и ТО</h3>
+										<div class="txt">
+											<p>Мы посталяем все марки товарного бетона</p>
+										</div>
+										<a  id="myBtn" class="btn btn-success transparate_button" href="#">Заказать бетон</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- holder end here -->
+				</div>
+				<!-- slider regular end here -->
+			</div><!-- mt main slider end here -->
+
+            <main id="mt-main">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<h2 class="text-center">Наши изделия:</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- banner frame start here -->
+							<div class="banner-frame">
+								<!-- banner-1 start here -->
+								<div class="banner-1 wow fadeInLeft" data-wow-delay="0.4s">
+									<img alt="image description" src="{% static 'img/pr.png' %}">
+									<div class="holder">
+										<h2>MY SMALL WRITING <br>DESK</h2>
+										<div class="txts">
+											<a class="btn-shop" href="product-detail.html">
+												<span>shop now</span>
+												<i class="fa fa-angle-right"></i>
+											</a>
+											<div class="discount">
+												<span>-20%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- banner-1 end here -->
+
+								<!-- banner-box first start here -->
+								<div class="banner-box first">
+									<!-- banner-2 start here -->
+									<div class="banner-2 wow fadeInUp" data-wow-delay="0.4s">
+										<img alt="image description" src="{% static 'img/pr.png' %}">
+										<div class="holder">
+											<h2>MODULAR LOUNGE <br>TEAK</h2>
+											<span class="price">$ 129.00</span>
+										</div>
+									</div>
+									<!-- banner-2 end here -->
+
+									<!-- banner-3 start here -->
+
+									<!-- banner-3 end here -->
+								</div>
+								<!-- banner-box first end here -->
+
+								<!-- banner-4 start here -->
+								<div class="banner-4 hidden-sm wow fadeInRight" data-wow-delay="0.4s">
+									<img alt="image description" src="{% static 'img/pr.png' %}">
+									<div class="holder">
+										<h2>Direct light <br>pendant lamp</h2>
+										<span class="price">$ 129.00</span>
+										<a class="btn-shop add" href="product-detail.html">
+											<span>shop now</span>
+											<i class="fa fa-angle-right"></i>
+										</a>
+									</div>
+								</div>
+								<!-- banner-4 end here -->
+							</div>
+							<div class="banner-frame">
+								<!-- banner-1 start here -->
+								<div class="banner-1 wow fadeInLeft" data-wow-delay="0.4s">
+									<img alt="image description" src="{% static 'img/pr.png' %}">
+									<div class="holder">
+										<h2>MY SMALL WRITING <br>DESK</h2>
+										<div class="txts">
+											<a class="btn-shop" href="product-detail.html">
+												<span>shop now</span>
+												<i class="fa fa-angle-right"></i>
+											</a>
+											<div class="discount">
+												<span>-20%</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- banner-1 end here -->
+
+								<!-- banner-box first start here -->
+								<div class="banner-box first">
+									<!-- banner-2 start here -->
+									<div class="banner-2 wow fadeInUp" data-wow-delay="0.4s">
+										<img alt="image description" src="{% static 'img/pr.png' %}">
+										<div class="holder">
+											<h2>MODULAR LOUNGE <br>TEAK</h2>
+											<span class="price">$ 129.00</span>
+										</div>
+									</div>
+									<!-- banner-2 end here -->
+
+									<!-- banner-3 start here -->
+
+									<!-- banner-3 end here -->
+								</div>
+								<!-- banner-box first end here -->
+
+								<!-- banner-4 start here -->
+								<div class="banner-4 hidden-sm wow fadeInRight" data-wow-delay="0.4s">
+									<img alt="image description" src="{% static 'img/pr.png' %}">
+									<div class="holder">
+										<h2>Direct light <br>pendant lamp</h2>
+										<span class="price">$ 129.00</span>
+										<a class="btn-shop add" href="product-detail.html">
+											<span>shop now</span>
+											<i class="fa fa-angle-right"></i>
+										</a>
+									</div>
+								</div>
+								<!-- banner-4 end here -->
+							</div>
+						</div>
+						<p class="text-center"><a class="btn btn-default go_to_order" href="{% url 'shop:shops' %}">Посмотреть всю продукцию</a></p>
+		</div>
+					</div>
+				</div>
+
+  <!-- Page Content -->
+    <section class="bg-color">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-center" style="color:#FFFF;">Наши преимущества</h2>
+			</div>
+			<div class="paddings">
+			</div>
+		</div>
+		<div class="row">
+		<div class="col-md-4 text-center">
+			<img class="image-preimushestvo" src="{% static 'img/dizayn_03.png' %}" alt="preimushestvo_1">
+			<p>Современные технологии<br/>изготовления</p>
+		</div>
+		<div class="col-md-4 text-center">
+			<img class="image-preimushestvo" src="{% static 'img/dizayn_04.png' %}" alt="preimushestvo_2">
+			<p>Гарантия качества</p>
+		</div>
+		<div class="col-md-4 text-center">
+			<img class="image-preimushestvo" src="{% static 'img/dizayn_08.png' %}" alt="preimushestvo_3">
+			<p>Доставка изделий и <br/> товарного бетона</p>
+		</div>
+		</div>
+	</div>
+</section>
+							<!-- banner frame end here -->
+				<!-- mt bestseller start here -->
+
+				<div class="mt-bestseller bottoms text-center wow fadeInUp" data-wow-delay="0.4s">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 mt-heading text-uppercase">
+								<h2 class="heading">Изделия на заказ</h2>
+							</div>
+						</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<img src="{% static 'img/dizayn_11.jpg' %}" style="width:100%;"  alt="ekskluziv_img">
+						</div>
+						<div class="col-xs-6">
+							<p class="order_information text-justify" style="font-size: 16px;">
+								В случае если среди наших товаров вы не нашли подходящего именно вам - не волнуйтесь и не переживайте! Предприятие “OOO BETOMAX-BETON” может предложить вам услугу “Изготовление изделия по персональному заказу”.Мы можем воплотить в реальность любые ваши идеи и желания! Для этого надо заполнить форму, где вам надо будет указать подробности вашего заказа, и в течение 2-3 рабочих дней наши менеджеры проинформируют Вас о цене товара и о сроках доставки.<br/>
+								Требования к заказу: <br/>
+								1. Чёткость рисунка(при его наличии). <br/>
+								2. Внятное описание. </br/>
+								3. Действительные данные для связи с вами.<br/>
+								Порядок действий при заказе: <br/>
+								1. Вы отправляете заявку.<br/>
+								2. Наши специалисты смотрят возможность производства вашего изделия.<br/>
+								2.1 После этого наш специалист проинформирует вас о затратах и сроках..<br/>
+								3. После Вашего согласия мы ждем от Вас предоплату и приступаем к процессу производства.
+							</p>
+							<p class="text-center"><a id="person_btns" class="btn btn-success go_to_order" href="#">Оформить персональный заказ</a></p>
+						</div>
+					</div>
+					</div>
+
+				</div>
+	<div class="text-center wow fadeInLeft" data-wow-delay="0.4s">
+		<div class="contaner-fluid">
+			<div class="bg_sales">
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="text-center" style="color:#FFFF">Купить изделия оптом</h2>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<img src="{% static 'img/dizayn_025.png' %}"  style="margin-left: 130px; width:70%;" alt="optom_izdelya">
+					</div>
+					<div class="col-md-6">
+						<p class="sale_information text-left"><span class="many_product">Вам нужно много железобетонных изделий?</span><br/><br/><br/>
+							Тогда OOO "BETOMAX-BETON" сделает Вам хорошую скидку.<br/>
+							При оптовом заказе железобетонных изделий цена ниже. <br/>
+							Чем больше заказывает тем больше скидка</p>
+
+						<p class="buttons_many_prod text-left"><a class="btn btn-default download_prais_button" href="#">Скачать прайс-лист</a>
+						    <a id="btn_optom" class="btn btn-default make_a_request" href="#">Оформить заявку</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+				<!-- mt bestseller start here -->
+				<div class="wow fadeInUp" data-wow-delay="0.4s">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<h2 class="text-center">Экскурсии по заводу</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<img class="factory_tours" src="{% static 'img/dizayn_19.png' %}" alt="ekskursion_image">
+							</div>
+							<div class="col-md-7">
+								<p class="text-left tours_info">
+									Раз в месяц по заводу OOO "BETOMAX-BETON"<br/>
+									проводятся экскурсии для студентов под руковдством преподователей
+								</p>
+								<p class="text-center"><a id="btn_eks" class="btn btn-default make_a_request" href="#">Записаться на экскурсию</a></p>
+							</div>
+						</div>
+					</div>
+				</div><!-- mt bestseller end here -->
+
+			</main><!-- mt main end here -->
+
+    {% endblock content %}
+			<!-- footer of the Page -->
+			<footer id="mt-footer" class="style1 wow fadeInUp" data-wow-delay="0.4s">
+				<div class="bg_footer">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4 text-center">
+			<h2 class="text-center" style="color:#FFFF;">Контакты</h2>
+			<hr class="line"/>
+			<p><i class="fa fa-envelope"></i> Email:jbi-2@bk.ru</p>
+			<p><span class="fa fa-phone"> +99898 367-00-87</span></p>
+			<p><span class="fa fa-phone"> +99898 367-00-89</span></p>
+		</div>
+		<div class="col-md-4 text-center shop">
+			<h2 class="text-center" style="color:#FFFF;">Магазин</h2>
+			<hr class="line"/>
+
+				<p><a href="">Железобетонные изделия</a></p>
+				<p><a href="">Аренда автотраспорта</a></p>
+				<p><a href="">Товарный бетон</a></p>
+
+		</div>
+		<div class="col-md-4">
+			<h2 class="text-center" style="color:#FFFF;">Обратная связь</h2>
+			<hr class="line"/>
+			<form action="{% url "shop:feedback" %}" method="POST">
+                {% csrf_token %}
+				<p><input class="input_footer"  name="name" type="text" placeholder="Ваше Имя:"></p>
+				<p><input class="input_footer"  name="phone" type="text" placeholder="Номер телефона"></p>
+                <p class="text-center padding_end_footer"><input class="btn btn-default make_a_request" type="submit" value="Отправить"></p>
+
+			</form>
+		</div>
+	</div>
+
+</div>
+</div>
+	<div class="end_bg_footer">
+		<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h4 class="text-center" style="color:#FFFF;">OOO BETOMAX-BETON</h4>
+			</div>
+		</div>
+		</div>
+	</div>
+			</footer>
+    <span id="back-top" class="fa fa-arrow-up"></span>
+	<!-- include jQuery -->
+
+
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<!-- include jQuery -->
+	<script src="{% static  'js/plugins.js'%}"></script>
+
+	<script src="{% static 'js/modal.js' %}"></script>
+	<!-- include jQuery -->
+        <script src="{% static 'js/jquery.main.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/slider/jquery.ba-cond.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/slider/jquery.slitslider.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/slider/modernizr.custom.79639.js'%}"></script>
+</body>
+</html>
+

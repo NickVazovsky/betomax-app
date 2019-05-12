@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <main id="mt-main">
+				<!-- Mt Product Detial of the Page -->
+				<section class="mt-product-detial wow fadeInUp" data-wow-delay="0.4s">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- Slider of the Page -->
+								<div class="slider">
+									<!-- Comment List of the Page -->
+									<ul class="list-unstyled comment-list">
+									</ul>
+									<!-- Comment List of the Page end -->
+									<!-- Product Slider of the Page -->
+									<div class="product-slider">
+										<div class="slide">
+											<img src="{{ product.image.url }}" alt="{{ product.slug }}" style="width: 610px; height: 330px;">
+										</div>
+										<div class="slide">
+											<img src="http://placehold.it/610x490" alt="image descrption">
+										</div>
+										<div class="slide">
+											<img src="http://placehold.it/610x490" alt="image descrption">
+										</div>
+										<div class="slide">
+											<img src="http://placehold.it/610x490" alt="image descrption">
+										</div>
+									</div>
+									<!-- Product Slider of the Page end -->
+									<!-- Pagg Slider of the Page -->
+{#									<ul class="list-unstyled slick-slider pagg-slider">#}
+{#										<li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>#}
+{#										<li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>#}
+{#										<li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>#}
+{#										<li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>#}
+{#										<li><div class="img"><img src="http://placehold.it/105x105" alt="image description"></div></li>#}
+{#									</ul>#}
+									<!-- Pagg Slider of the Page end -->
+								</div>
+								<!-- Slider of the Page end -->
+								<!-- Detail Holder of the Page -->
+								<div class="detial-holder">
+									<!-- Breadcrumbs of the Page -->
+									<ul class="list-unstyled breadcrumbs">
+										<li><a href="{{ product.category.get_absolute_url }}">{{ product.category }}<i class="fa fa-angle-right"></i></a></li>
+										<li>{{ product.name }}</li>
+									</ul>
+									<!-- Breadcrumbs of the Page end -->
+									<h2>{{ product.name }}</h2>
+									<!-- Rank Rating of the Page -->
+									<div class="rank-rating">
+{#										<span class="total-price">Reviews (12)</span>#}
+{#										<ul class="list-unstyled rating-list">#}
+{#											<li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#											<li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#											<li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#											<li><a href="#"><i class="fa fa-star-o"></i></a></li>#}
+{#										</ul>#}
+									</div>
+									<!-- Rank Rating of the Page end -->
+									<div class="text-holder">
+										<span class="price">{{ product.price }} сумм</span>
+									</div>
+									<!-- Product Form of the Page -->
+									 <form class="product-form" action="{% url "cart:CartAdd" product.id %}" method="post" style="margin-bottom: 40px;" class="add">
+										<fieldset>
+											<div class="row-val">
+                                                {{ cart_product_form }}
+                                                {% csrf_token %}
+
+											</div>
+											<div class="row-val">
+                                                <button class="btn btn-success add_to_cart"  type="submit">Добавить в корзину</button>
+                                            </div>
+										</fieldset>
+									</form>
+									<div class="txt-wrap">
+										<p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair.</p>
+										<p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair.</p>
+									</div>
+									<!-- Product Form of the Page end -->
+								</div>
+								<!-- Detail Holder of the Page end -->
+							</div>
+						</div>
+					</div>
+				</section><!-- Mt Product Detial of the Page end -->
+				<div class="product-detail-tab wow fadeInUp" data-wow-delay="0.4s">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<ul class="mt-tabs text-center text-uppercase">
+									<li><a href="#tab1">Описание</a></li>
+									<li><a href="#tab2">Информация об изделии</a></li>
+									<li><a href="#tab3" class="active">Отзывы</a></li>
+								</ul>
+								<div class="tab-content">
+									<div id="tab1">
+										<p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair. </p>
+										<p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair. <br>Solid oak construction.<br> Back in plywood (2  faces oak veneer) or upholstered in fabric, leather or eco-leather.<br> Seat upholstered in fabric, leather or eco-leather. <br> H 830 x L 585 x P 540 mm.</p>
+									</div>
+									<div id="tab2">
+										<p>Koila is a chair designed for restaurants and food lovers in general. Designed in collaboration with restaurant professionals, it ensures comfort and an ideal posture, as there are armrests on both sides of the chair. </p>
+										<p>Koila is a seat designed for restaurants and gastronomic places in general. Designed in collaboration with professional of restaurants and hotels field, this armchair is composed of a curved shell with a base in oak who has pinched the back upholstered in fabric or leather. It provides comfort and holds for ideal sitting position,the arms may rest on the sides ofthe armchair. <br>Solid oak construction.<br> Back in plywood (2  faces oak veneer) or upholstered in fabric, leather or eco-leather.<br> Seat upholstered in fabric, leather or eco-leather. <br> H 830 x L 585 x P 540 mm.</p>
+									</div>
+									<div id="tab3">
+										<div class="product-comment">
+											{% for comments in coments %}
+                                            <div class="mt-box">
+												<div class="mt-hold">
+													<ul class="mt-star">
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star"></i></li>
+														<li><i class="fa fa-star-o"></i></li>
+													</ul>
+													<span class="name">{{ comments.name }}</span>
+													<time datetime="2016-01-01">09:10 Nov, 19 2016</time>
+												</div>
+												<p>{{ comments.comment }}</p>
+											</div>
+                                            {% endfor %}
+											<form method="POST" class="p-commentform">
+												<fieldset>
+													<h2>Добавить комментарий</h2>
+													<div class="mt-row">
+														{% csrf_token %}
+                                                        {{ comments_form.name }}
+													</div>
+													<div class="mt-row">
+														{{ comments_form.email }}
+													</div>
+													<div class="mt-row">
+														{{ comments_form.comment }}
+													</div>
+                                                    <input style="margin:0px!important;" type="submit" class="btn-type4" value="добавить комментарий">
+												</fieldset>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- related products start here -->
+				<div class="related-products wow fadeInUp" data-wow-delay="0.4s">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+							<h2>RELATED PRODUCTS</h2>
+								<div class="row">
+									<div class="col-xs-12">
+										<!-- mt product1 center start here -->
+                                        {% for related in prod %}
+										<div class="mt-product1 mt-paddingbottom20">
+
+											<div class="box">
+												<div class="b1">
+													<div class="b2">
+														<a href="{{ related.get_absolute_url }}"><img src="{{ related.image.url }}" alt="{{ related.slug }}"></a>
+														<span class="caption">
+															<span class="new">NEW</span>
+														</span>
+														<ul class="mt-stars">
+															<li><i class="fa fa-star"></i></li>
+															<li><i class="fa fa-star"></i></li>
+															<li><i class="fa fa-star"></i></li>
+															<li><i class="fa fa-star-o"></i></li>
+														</ul>
+													</div>
+												</div>
+											</div>
+											<div class="txt">
+												<strong class="title"><a href="{{ related.get_absolute_url }}">{{ related.name }}</a></strong>
+												<span class="price"><i class="fa fa-eur"></i> <span>{{ related.price }} сум</span></span>
+											</div>
+
+										</div>
+                                        {% endfor %}<!-- mt product1 center end here -->
+										<!-- mt product1 center start here -->
+										<!-- mt product1 center start here -->
+										</div><!-- mt product1 center end here -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!-- related products end here -->
+				</div>
+			</main><!-- mt main end here -->
+
+{% endblock %}

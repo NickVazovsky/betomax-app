@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+   <main id="mt-main">
+				<!-- Mt Contact Banner of the Page -->
+				<section class="mt-contact-banner style4 wow fadeInUp" data-wow-delay="0.4s"
+                         style="background-image: url({% static 'img/products_bg.jpg' %});
+                                 background-size: 100% 100%; height:300px; padding: 117px 0 14px;">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 text-center">
+								<h1 style="color: #FFF;">Ж/б изделия</h1>
+								<!-- Breadcrumbs of the Page -->
+								<nav class="breadcrumbs">
+									<ul class="list-unstyled">
+
+									</ul>
+								</nav><!-- Breadcrumbs of the Page end -->
+							</div>
+						</div>
+					</div>
+				</section><!-- Mt Contact Banner of the Page end -->
+				<div class="container">
+					<div class="row">
+						<!-- sidebar of the Page start here -->
+						<aside id="sidebar" class="col-xs-12 col-sm-4 col-md-3 wow fadeInLeft" data-wow-delay="0.4s">
+							<!-- shop-widget filter-widget of the Page start here -->
+
+							<!-- shop-widget of the Page start here -->
+							<section class="shop-widget">
+								<h2>Категории изделий</h2>
+								<!-- category list start here -->
+								<ul class="list-unstyled category-list">
+									 <li {% if not category %} class="selected" {% endif %}>
+                                        <a href="{% url "shop:shops" %}">Все</a>
+                                      </li>
+                                      {% for cat in categories %}
+                                      <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+                                          <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                                     </li>
+                                      {% endfor %}
+								</ul><!-- category list end here -->
+							</section><!-- shop-widget of the Page end here -->
+							<!-- shop-widget of the Page start here -->
+
+						</aside><!-- sidebar of the Page end here -->
+						<div class="col-xs-12 col-sm-8 col-md-9 wow fadeInRight" data-wow-delay="0.4s">
+							<!-- mt shoplist header start here -->
+							<header class="mt-shoplist-header">
+								<!-- btn-box start here -->
+								<div class="btn-box">
+									<ul class="list-inline">
+										<li>
+											<a href="#" class="drop-link">
+												Default Sorting <i aria-hidden="true" class="fa fa-angle-down"></i>
+											</a>
+											<div class="drop">
+												<ul class="list-unstyled">
+													<li><a href="#">ASC</a></li>
+													<li><a href="#">DSC</a></li>
+													<li><a href="#">Price</a></li>
+													<li><a href="#">Relevance</a></li>
+												</ul>
+											</div>
+										</li>
+									</ul>
+								</div><!-- btn-box end here -->
+								<!-- mt-textbox start here -->
+								<div class="mt-textbox">
+									<p>Showing  <strong>1–9</strong> of  <strong>65</strong> results</p>
+									<p>View   <a href="#">9</a> / <a href="#">18</a> / <a href="#">27</a> / <a href="#">All</a></p>
+								</div><!-- mt-textbox end here -->
+							</header><!-- mt shoplist header end here -->
+							<!-- mt productlisthold start here -->
+							<ul class="mt-productlisthold list-inline">
+                                 {% for product in products %}
+                                <li>
+									<!-- mt product1 large start here -->
+									<div class="mt-product1 large">
+										<div class="box">
+											<div class="b1">
+												<div class="b2">
+													<a href="{{ product.get_absolute_url }}"><img src="{% if product.image %}{{ product.image.url }}
+                                                            {% else %}
+                                                            {% static "img/no-image.jpg"%}{% endif %}" alt="{{ product.slug }}"></a>
+													<ul class="links">
+														<li><a href="{{ product.get_absolute_url }}" class="add_to_cart"><i class="glyphicon glyphicon-open"></i><span>{{ product.name }}</span></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="txt text-center">
+											<strong class="title"><a href="{{ product.get_absolute_url }}"> {{ product.name }}</a></strong>
+											<span class="price"><span>{{ product.price }} руб</span></span>
+										</div>
+									</div><!-- mt product1 center end here -->
+								</li>
+                                {% endfor %}
+
+
+									<!-- mt product1 large start here -->
+							</ul><!-- mt productlisthold end here -->
+							<!-- mt pagination start here -->
+							<!---<nav class="mt-pagination">
+								<ul class="list-inline">
+									<li><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+								</ul>
+							</nav>---><!-- mt pagination end here -->
+						</div>
+					</div>
+				</div>
+			</main><!-- mt main end here -->
+
+{#    <script>#}
+{#        $(document).ready(function () {#}
+{#            $('.add_to_cart').on('click', function (e) {#}
+{#                e.preventDefault()#}
+{#                product_slug = $(this).attr('data-slug')#}
+{#                data ={#}
+{#                    product_slug:product_slug#}
+{#                }#}
+{#                $.ajax({#}
+{#                    type:'GET',#}
+{#                    url:'{% url 'cart:CartAdd" product.id' %}',#}
+{#                    data:data,#}
+{#                    success: function (data) {#}
+{#                        $('#cart_count').html(data.cart_total)#}
+{#                    }#}
+{#                })#}
+{#            })#}
+{#        })#}
+{#    </script>#}
+{% endblock content %}

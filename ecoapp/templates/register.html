@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="mt-contact-banner about-banner wow fadeInUp" data-wow-delay="0.4s" style="background-image: url({% static 'img/shoping_cart_bg.jpg'%});">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <h1 style="color:#FFFFFF">Регистрация</h1>
+                <nav class="breadcrumbs">
+                </nav>
+              </div>
+            </div>
+          </div>
+        </section>
+             {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tag }}">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+    {% endif %}
+    <div class="container">
+        <div class="row">
+        <div class="holder" style="margin: 0; -webkit-box-shadow: 0px 0px 17px 6px rgba(194,180,194,1);
+-moz-box-shadow: 0px 0px 17px 6px rgba(194,180,194,1);
+box-shadow: 0px 0px 17px 6px rgba(194,180,194,1);     background-color: #dcdada5c;
+    margin: 3% auto;
+    width: 60%;
+    padding: 30px 0;
+    ">
+                    <div class="mt-side-widget">
+            <div class="col-md-6 col-md-offset-3">
+
+            <div class="content">
+                <form action="" method="post" class="form-input" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        {{ form }}
+                        {{ avatar_form }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Sign In</button>
+                    </div>
+                    <div class="border-top pt-3">
+                        <small class="text-muted">Already Have an Account? <a href="#" class="ml-2">Sign Up</a></small>
+                    </div>
+                </form>
+            </div>
+            </div>
+                    </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+    	#map {
+            width: 100%;
+            height: 300px;
+            padding: 0;
+            margin: 0;
+        }
+ .ymaps-2-1-63-gotoymaps{
+    display:none!important;
+    }
+#result{display: none;background: #fff;}
+#result.active{display: block;}
+
+	</style>
+    <main id="mt-main">
+        <section class="mt-contact-banner mt-banner-22 wow fadeInUp" data-wow-delay="0.4s"
+                 style="background-image: url({% static 'img/shoping_cart_bg.jpg'%});">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <h1 class="text-center">Ваша корзина</h1>
+                <!-- Breadcrumbs of the Page -->
+                <!-- Breadcrumbs of the Page end -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mt Process Section of the Page -->
+        <div class="my-cart mt-process-sec wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <ul class="list-unstyled process-list">
+                  <li class="active">
+                    <span class="counter">01</span>
+                    <strong class="title">Корзина</strong>
+                  </li>
+                  <li>
+                    <span class="counter">02</span>
+                    <strong class="title">Оформление заказа</strong>
+                  </li>
+                  <li>
+                    <span class="counter">03</span>
+                    <strong class="title">Оплата</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div><!-- Mt Process Section of the Page end -->
+        <!-- Mt Product Table of the Page -->
+        <div class="mt-product-table wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+
+            <div class="row border">
+                <div class="col-xs-12 col-sm-6">
+                <strong class="title">Продукт</strong>
+              </div>
+              <div class="col-xs-12 col-sm-2">
+                <strong class="title">Цена</strong>
+              </div>
+              <div class="col-xs-12 col-sm-2">
+                <strong class="title">Количество</strong>
+              </div>
+              <div class="col-xs-12 col-sm-2">
+                <strong class="title">Итого</strong>
+              </div>
+            </div>
+               {% for item in cart %}
+            {% with product=item.product %}
+            <div class="row border">
+              <div class="col-xs-12 col-sm-2">
+                <div class="img-holder">
+                  <img src="{{ product.image.url }}" alt="image description">
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <strong class="product-name">{{ product.name }}</strong>
+              </div>
+              <div class="col-xs-12 col-sm-2">
+                <strong class="price" style="font-size: 16px!important;">{{ item.price }} руб.</strong>
+              </div>
+              <div class="col-xs-12 col-sm-2">
+                   <form style="margin-top: -8%;" class="qyt-form"  action="{% url "cart:CartAdd" product.id %}" method="post" class="add">
+                {{ item.update_quantity_form.quantity }}
+                {{ item.update_quantity_form.update }}
+                {% csrf_token %}
+                <button style="margin-top: -4%;" class="btn btn-success" type="submit"><i class="fa fa-refresh"></i></button>
+              </form>
+              </div>
+              <div class="col-xs-12 col-sm-2">
+                <strong class="price" id="prices" style="font-size: 16px!important;">{{ item.total_price }}  руб.</strong>
+                 <a href="{% url "cart:CartRemove" product.id %}"><i class="fa fa-close"></i></a>
+              </div>
+            </div>
+              {% endwith %}
+          {% endfor %}
+
+        </div><!-- Mt Product Table of the Page end -->
+        <!-- Mt Detail Section of the Page -->
+        <section class="mt-detail-sec style1 wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h2>Рассчитать Доставку</h2>
+                <form action="#" class="bill-detail">
+                  <fieldset>
+                    <div class="form-group">
+                        <input  class="form-control" type="text" value="г.Ташкент Охангабо, 7" readonly>
+                    </div>
+                    <div class="form-group">
+                      <div id="map"></div>
+                    </div>
+                    <div class="form-group">
+                      <button id="calc" class="process-btn" type="submit">Рассчитать доставку<i class="fa fa-calculator"></i></button>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+
+              <div class="col-xs-12 col-sm-6">
+
+                <h2>Итого: {{ cart.get_total_price }}</h2>
+
+                <ul class="list-unstyled block cart">
+                  <li>
+                    <div class="txt-holder">
+                      <strong class="title sub-title pull-left">Итого без доставки</strong>
+                      <div class="txt pull-right">
+                        <span id="cart-total-price">{{ cart.get_total_price }}</span>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="txt-holder">
+                      <strong class="title sub-title pull-left">Доставка</strong>
+                      <div class="txt pull-right"  id="result">
+                      </div>
+                    </div>
+                  </li>
+                  <li style="border-bottom: none;">
+                    <div class="txt-holder">
+                      <strong class="title sub-title pull-left">Итоговая цена:</strong>
+                      <div class="txt pull-right">
+                        <span id="cart-total-price"> {{ cart.cart_total }}</span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+
+                  <a href="{% url "orders:OrderCreate" %}" class="process-btn">Оформить заказ <i class="fa fa-check"></i></a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Mt Detail Section of the Page end -->
+
+
+      </main><!-- Main of the Page end here -->
+
+
+
+
+
+  		<script>
+					$('#calc').on('click',function(){
+			$('#result').addClass('active');
+		});
+		function init() {
+		    var myMap = new ymaps.Map('map', {
+		            center: [60.906882, 30.067233],
+		            zoom: 9,
+		            type: 'yandex#map',
+		            visible:false,
+		            controls: []
+
+		        }),
+		        searchStartPoint = new ymaps.control.SearchControl({
+		            options: {
+		                useMapBounds: true,
+		                noPlacemark: true,
+		                noPopup: true,
+		                visible: false,
+		                // value: 'test',
+		                placeholderContent: 'Адрес начальной точки',
+		                size: 'large'
+		            }
+		        }),
+
+		        searchFinishPoint = new ymaps.control.SearchControl({
+		            options: {
+		                useMapBounds: true,
+		                noCentering: true,
+		                noPopup: true,
+		                noPlacemark: true,
+		                placeholderContent: 'Адрес конечной точки',
+		                size: 'large',
+		                float: 'none',
+		                position: { left: 10, top: 44 }
+		            }
+		        }),
+		        calculator = new DeliveryCalculator(myMap, myMap.getCenter());
+		        		        searchStartPoint.search('>Узбекистан, Ташкент, Тошкент Халка Автомобиль Йули');
+		    myMap.controls.add(searchStartPoint);
+		    myMap.controls.add(searchFinishPoint);
+
+		    searchStartPoint.events.add('resultselect', function (e) {
+		        var results = searchStartPoint.getResultsArray(),
+		            selected = e.get('index'),
+		            point = results[selected].geometry.getCoordinates();
+
+		        calculator.setStartPoint(point);
+		    })
+		        .add('load', function (event) {
+		            // По полю skip определяем, что это не дозагрузка данных.
+		            // По getRusultsCount определяем, что есть хотя бы 1 результат.
+		            if (!event.get('skip') && searchStartPoint.getResultsCount()) {
+		                searchStartPoint.showResult(0);
+		            }
+		        });
+
+		    searchFinishPoint.events.add('resultselect', function (e) {
+		        var results = searchFinishPoint.getResultsArray(),
+		            selected = e.get('index'),
+		            point = results[selected].geometry.getCoordinates();
+
+		        calculator.setFinishPoint(point);
+		    })
+		        .add('load', function (event) {
+		            // По полю skip определяем, что это не дозагрузка данных.
+		            // По getRusultsCount определяем, что есть хотя бы 1 результат.
+		            if (!event.get('skip') && searchFinishPoint.getResultsCount()) {
+		                searchFinishPoint.showResult(0);
+		            }
+		        });
+		}
+
+		function DeliveryCalculator(map, finish) {
+		    this._map = map;
+		    this._start = null;
+		    this._route = null;
+		    this._startBalloon;
+		    this._finishBalloon;
+
+		    map.events.add('click', this._onClick, this);
+		}
+
+		var ptp = DeliveryCalculator.prototype;
+
+		ptp._onClick= function (e) {
+		    if (this._start) {
+		        this.setFinishPoint(e.get('coords'));
+		    } else {
+		        this.setStartPoint(e.get('coords'));
+		    }
+		};
+
+		ptp._onStartDragEnd = function (e) {
+		    var coords = this._start.geometry.getCoordinates();
+		    this.geocode("start", coords);
+		}
+
+		ptp._onFinishDragEnd = function (e) {
+		    var coords = this._finish.geometry.getCoordinates();
+		    this.geocode("finish", coords);
+		}
+
+		ptp.getDirection = function () {
+		    if(this._route) {
+		        this._map.geoObjects.remove(this._route);
+		    }
+
+		    if (this._start && this._finish) {
+		        var self = this,
+		            start = this._start.geometry.getCoordinates(),
+		            finish = this._finish.geometry.getCoordinates(),
+		            startBalloon = this._startBalloon,
+		            finishBalloon = this._finishBalloon;
+		        ymaps.route([start, finish])
+		            .then(function (router) {
+		                var distance = Math.round(router.getLength() / 1000),
+		                    message = '<span style="font-weight: bold; font-style: italic">Стоимость доставки: %sс.</span>';
+
+		                self._route = router.getPaths();
+
+		                self._route.options.set({ strokeWidth: 5, strokeColor: '0000ffff', opacity: 0.5 });
+		                self._map.geoObjects.add(self._route);
+		                self._start.properties.set('balloonContentBody', startBalloon + message.replace('%s', self.calculate(distance)));
+		                self._finish.properties.set('balloonContentBody', finishBalloon + message.replace('%s', self.calculate(distance)));
+		                $('#result').html(finishBalloon + message.replace('%s', self.calculate(distance)));
+		            });
+
+		        self._map.setBounds(self._map.geoObjects.getBounds())
+		    }
+		};
+
+		ptp.setStartPoint = function (position) {
+		    if(this._start) {
+		        this._start.geometry.setCoordinates(position);
+		    }
+		    else {
+		        this._start = new ymaps.Placemark(position, { iconContent: 'А' }, { draggable: true });
+		        this._start.events.add('dragend', this._onStartDragEnd, this);
+		        this._map.geoObjects.add(this._start);
+		    }
+		    this.geocode("start", position);
+		};
+
+		ptp.setFinishPoint = function (position) {
+		    if(this._finish) {
+		        this._finish.geometry.setCoordinates(position);
+		    }
+		    else {
+		        this._finish = new ymaps.Placemark(position, { iconContent: 'Б' }, { draggable: true });
+		        this._finish.events.add('dragend', this._onFinishDragEnd, this);
+		        this._map.geoObjects.add(this._finish);
+		    }
+		    if (this._start) {
+		        this.geocode("finish", position);
+		    }
+		};
+
+		ptp.geocode = function (str, point) {
+		    ymaps.geocode(point).then(function(geocode) {
+		        if (str == "start") {
+		            this._startBalloon = geocode.geoObjects.get(0) &&
+		                geocode.geoObjects.get(0).properties.get('balloonContentBody') || '';
+		            console.log(str + "" + this._startBalloon);
+		        } else {
+		            this._finishBalloon = geocode.geoObjects.get(0) &&
+		                geocode.geoObjects.get(0).properties.get('balloonContentBody') || '';
+		            console.log(str + " " + this._finishBalloon);
+		        }
+		        this.getDirection();
+		    }, this);
+
+		}
+		ptp.calculate = function (len) {
+		    // Константы.
+		    var DELIVERY_TARIF = 150000,
+		        MINIMUM_COST = 95000;
+
+		    return Math.max(len * DELIVERY_TARIF, MINIMUM_COST);
+		};
+
+		ymaps.ready(init);
+
+
+
+		</script>
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load  static %}
+{% block content %}
+     <main id="mt-main">
+        <section class="mt-contact-banner mt-banner-22 wow fadeInUp" data-wow-delay="0.4s"
+                 style="background-image: url({% static 'img/shoping_cart_bg.jpg'%});">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <h1 class="text-center">Ваша корзина</h1>
+                <!-- Breadcrumbs of the Page -->
+                <!-- Breadcrumbs of the Page end -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mt Process Section of the Page -->
+        <div class="my-cart mt-process-sec wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <ul class="list-unstyled process-list">
+                  <li class="active">
+                    <span class="counter">01</span>
+                    <strong class="title">Корзина</strong>
+                  </li>
+                  <li class="active">
+                    <span class="counter">02</span>
+                    <strong class="title">Оформление заказа</strong>
+                  </li>
+                  <li class="active">
+                    <span class="counter">03</span>
+                    <strong class="title">Оплата</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+         <div class="container">
+             <div class="row">
+                 <div class="col-xs-6">
+                      <h2>Оплата PayPal</h2>
+                        {{ form.render }}
+                 </div>
+                 <div class="col-xs-6">
+                      <h2>Оплата наличными</h2>
+                     <button id="calc" class="process-btn" type="submit"><a href="{% url "payment:done" %}">Оплатить наличными</a><i class="fa fa-calculator"></i></button>
+                 </div>
+             </div>
+         </div>
+
+
+{% endblock content %}

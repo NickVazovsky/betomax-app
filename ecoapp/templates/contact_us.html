@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+      <main id="mt-main">
+        <!-- Mt Map Holder of the Page -->
+        <div class="mt-map-holder wow fadeInUp" data-wow-delay="0.4s" data-lat="52.392363" data-lng="1.480408" data-zoom="8">
+          <div class="map-info">
+            <h2>Sochan</h2>
+            <p>Lorem ipsum dolor sit amet...</p>
+          </div>
+        </div>
+        <!-- Mt Map Holder of the Page end -->
+        <!-- Mt Map Descrp of the Page -->
+        <section class="mt-map-descrp wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <h1>BETOMAX-BETON</h1>
+                <p>Это залог качества и надежности  <br>Вместе с вами мы построим светлое будущее <br></p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Mt Map Descrp of the Page end -->
+        <!-- Mt Contact Detail of the Page -->
+        <div class="mt-contact-detail wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 mt-paddingbottomxs text-center">
+                <span class="icon"><i class="fa fa-map-marker"></i></span>
+                <strong class="title">АДРЕС</strong>
+                <address>г.Ташкент улица Оханграбо 7<br></address>
+              </div>
+              <div class="col-xs-12 col-sm-4 mt-paddingbottomxs text-center">
+                <span class="icon"><i class="fa fa-phone"></i></span>
+                <strong class="title">Телефон</strong>
+                <a href="#">+(99871) 208-88-88</a>
+              </div>
+              <div class="col-xs-12 col-sm-4 mt-paddingbottomxs text-center">
+                <span class="icon"><i class="fa fa-envelope-o"></i></span>
+                <strong class="title">E_MAIL</strong>
+                <a href="#">jbi-2@mail.ru</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Mt Contact Detail of the Page end -->
+        <!-- Mt Form Section of the Page -->
+        <section class="mt-form-sec wow fadeInUp" data-wow-delay="0.4s">
+          <div class="container">
+            <div class="row">
+              <header class="col-xs-12 text-center header">
+                <h2>У вас остались вопросы?</h2>
+                <p> Мы с радостью на них ответим. <br>Заполните форму снизу и мы свяжемся с вами в течении 30 минут.</p>
+              </header>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <!-- Contact Form of the Page -->
+                <form method="POST" class="contact-form">
+                  <fieldset>
+                    {% csrf_token %}
+                      {{ contact_form }}
+                      <br/>
+                      <input type="submit" class="btn-type3" value="Отправить">
+                  </fieldset>
+                </form>
+                <!-- Contact Form of the Page end -->
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Mt Form Section of the Page -->
+      </main>
+{% endblock content %}
